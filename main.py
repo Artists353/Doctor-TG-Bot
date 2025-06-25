@@ -12,7 +12,13 @@ dp = Dispatcher()
 @dp.message(Command('start'))
 async def start_command(message: types.Message):
     await message.answer('Приветствие и объяснение')
-    
+    kb = [
+        [KeyboardButton('Согласиться.')],
+        [KeyboardButton('Не соглашаться.')]
+    ]
+    keyboard = ReplyKeyboardMarkup(keyboard=kb, input_field_placeholder='Вы согласны со всеми правилами?')
+    await message.answer('ну там щас че то будет', reply_markup=keyboard)
+
 
 async def main():
     await dp.start_polling(bot)
