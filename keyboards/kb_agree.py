@@ -1,8 +1,10 @@
-from aiogram.types import ReplyKeyboardMarkup
-from aiogram.utils.keyboard import ReplyKeyboardBuilder
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-def kb_agree() -> ReplyKeyboardMarkup:
-    kb = ReplyKeyboardBuilder()
-    kb.button(text = "Соглaситься")
-    kb.button(text = "Не соглашаться")
-    return kb.as_markup(resize_keyboard = True)
+def kb_agree():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="Согласиться")],
+            [KeyboardButton(text="Не соглашаться")]
+        ],
+        resize_keyboard=True
+    )

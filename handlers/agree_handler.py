@@ -12,13 +12,15 @@ async def start(message: Message):
                          reply_markup=kb_agree())
 
 
-@router.message(F.text.lower == "согласиться")
+@router.message(lambda message: message.text and message.text.lower() == "согласиться")
 async def answer_agree(message: Message):
-        await message.answer("Отлично. Теперь, нажмите на кнопку Тарифы, чтобы перейти к тарифам, или Назад, чтобы вернуться к команде Start.", 
-                             reply_markup=ReplyKeyboardRemove())
-        
-
-@router.message(F.text.lower == "не соглашаться")
-async def answer_agree(message: Message):
-        await message.answer("К сожалению, без соглашения мы не можем предоставить вам доступ к материалу.", 
-                             reply_markup=ReplyKeyboardRemove())
+    await message.answer(
+        "Отлично. Теперь, нажмите на кнопку Тарифы, чтобы перейти к тарифам, или Назад, чтобы вернуться к команде Start.",
+        reply_markup=ReplyKeyboardRemove()
+    )
+@router.message(lambda message: message.text and message.text.lower() == "не соглашаться")
+async def answer_disagree(message: Message):
+    await message.answer(
+        "К сожалению, без соглашения мы не можем предоставить вам доступ к материалу.",
+        reply_markup=ReplyKeyboardRemove()
+    )
