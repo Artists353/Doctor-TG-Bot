@@ -1,2 +1,2 @@
-#7560534293:AAHPWzyz5Zdm4_uprE2SIjPV4TZoyIwjJzI твой бот
-TOKEN = '7560534293:AAHPWzyz5Zdm4_uprE2SIjPV4TZoyIwjJzI'
+#@Zdraviya0_bot 
+TOKEN = '8001576473:AAEpvPw9gFVlnyeHI1TL2fru2DasIspQbCw'
