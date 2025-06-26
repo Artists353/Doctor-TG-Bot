@@ -1,2 +1,2 @@
 #@Zdraviya0_bot 
-TOKEN = '8001576473:AAEpvPw9gFVlnyeHI1TL2fru2DasIspQbCw'
+TOKEN = '7983355344:AAHeuHA0S3H_0rWeXJJhu9Bx0z7fmmqDz9w'
