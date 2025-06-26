@@ -6,7 +6,7 @@ from api_token import TOKEN
 from aiogram.enums import ParseMode
 from aiogram.types import FSInputFile, KeyboardButton, ReplyKeyboardMarkup 
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
-bot = Bot('7560534293:AAHPWzyz5Zdm4_uprE2SIjPV4TZoyIwjJzI') 
+bot = Bot(TOKEN) 
 dp = Dispatcher()
 
 
