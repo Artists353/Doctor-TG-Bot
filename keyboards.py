@@ -1,6 +1,15 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-def kb_agree():
+def tariffs_kb():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="Тарифы")],
+            [KeyboardButton(text="Назад")]
+        ],
+        resize_keyboard=True
+    )
+
+def agree_kb():
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text="Согласиться")],
