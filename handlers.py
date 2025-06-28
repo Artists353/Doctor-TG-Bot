@@ -9,7 +9,7 @@ router = Router()
 
 @router.message(Command("start"))
 async def start(message: Message):
-    await message.answer("Привет. Я бот. Чтобы продолжить работу, вы должны быть согласны со всеми правилами?", 
+    await message.answer("Привет. Я бот. Чтобы продолжить работу, вы должны быть согласны со всеми правилами", 
                          reply_markup=agree_kb)
 
 
