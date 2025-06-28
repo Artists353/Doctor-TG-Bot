@@ -28,3 +28,7 @@ async def answer_tariffs(message: Message):
 @router.message(lambda message: message.text and message.text.lower() == "не соглашаться")
 async def answer_disagree(message: Message):
     await message.answer("К сожалению, без соглашения мы не можем предоставить вам доступ к материалу.", reply_markup=agree_kb)
+
+@router.message(lambda message: message.text and message.text.lower() == "назад")
+async def answer_disagree(message: Message):
+    await message.answer("Вы вернулись к соглашению с правилами.", reply_markup=agree_kb)
