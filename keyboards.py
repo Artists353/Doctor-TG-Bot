@@ -17,4 +17,4 @@ agree_kb = ReplyKeyboardMarkup(keyboard=[
     )
 
 pay_inkb = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Оплата тарифа', 
-                                                                       url='https://www.youtube.com/watch?v=qRyshRUA0xM&list=PLV0FNhq3XMOJ31X9eBWLIZJ4OVjBwb-KM&index=4')]])
+                                                                       url='https://yookassa.ru/')]])
