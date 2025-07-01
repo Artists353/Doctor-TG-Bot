@@ -16,5 +16,11 @@ agree_kb = ReplyKeyboardMarkup(keyboard=[
         
     )
 
-pay_inkb = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Оплата тарифа', 
+pay_inkb1 = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Оплата тарифа', 
+                                                                       url='https://yookassa.ru/')]])
+
+pay_inkb2 = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Оплата тарифа', 
+                                                                       url='https://yookassa.ru/')]])
+
+pay_inkb3 = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Оплата тарифа', 
                                                                        url='https://yookassa.ru/')]])

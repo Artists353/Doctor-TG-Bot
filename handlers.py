@@ -6,7 +6,10 @@ from aiogram.client.default import DefaultBotProperties
 
 from keyboards import agree_kb
 from keyboards import tariffs_kb
-from keyboards import pay_inkb
+from keyboards import pay_inkb1
+from keyboards import pay_inkb2
+from keyboards import pay_inkb3 
+
 from bot import Bot
 router = Router()
 
@@ -15,12 +18,13 @@ PROVIDER_TOKEN = "s"
 
 @router.message(Command("start"))
 async def start(message: Message):
-    await message.answer("Добро пожаловать 🔹\n" \
+    await message.answer(
+    "Добро пожаловать 🔹\n" \
     "📽 Здесь вы найдёте авторские видеоматериалы от опытного инструктора ЛФК, разработанные специально для:\n" \
     "— восстановления после травм и заболеваний\n" \
     "— мягкой гимнастики при болях\n" \
     "— поддержания подвижности в любом возрасте\n\n" \
-    " 🛒 Вы можете:\n" \
+    "🛒 Вы можете:\n" \
     "• выбрать нужный курс\n" \
     "• оплатить прямо здесь\n" \
     "• получить доступ к видео сразу после оплаты\n\n" \
@@ -38,7 +42,13 @@ async def answer_agree(message: Message):
     
 @router.message(lambda message: message.text and message.text.lower() == "тарифы")
 async def answer_tariffs(message: Message):
-    await message.answer("Чтобы оплатить, нажмите на кнопку ниже:", reply_markup=pay_inkb)
+    await message.answer("Правосторонний сколиоз 1-2 степени\n\n" \
+    "Цена: 1499 рублей", reply_markup=pay_inkb1)
+
+    await message.answer("Левосторонний сколиоз 1-2 степени\n\n" \
+    "Цена: 1499 рублей", reply_markup=pay_inkb2)
+    await message.answer("Плоскостопие\n\n" \
+    "Цена: 1499 рублей", reply_markup=pay_inkb3)
 
 
 @router.pre_checkout_query()
@@ -51,7 +61,6 @@ async def process_callback_query(callback_query: types.CallbackQuery, bot: Bot) 
     prices = []
     description = 'Купить тариф.'
     prices = [LabeledPrice(label="Оплата тарифа: ", amount=100)]
-    
     if prices:
         await bot.send_invoice(
             chat_id=callback_query.from_user.id,
@@ -59,9 +68,8 @@ async def process_callback_query(callback_query: types.CallbackQuery, bot: Bot) 
             description=description,
             provider_token=PROVIDER_TOKEN,
             prices=prices,
-            currency=CURRENCY
+            currency=CURRENCY 
         )
-
 
 @router.message(F.successful_payment)
 async def process_successful_payment(message: Message) -> None:
