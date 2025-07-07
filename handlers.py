@@ -51,13 +51,23 @@ async def answer_tariffs(message: Message):
 
 @router.callback_query()
 async def process_callback_query(callback_query: types.CallbackQuery, bot: Bot) -> None:
+    action = callback_query.data.split("_")[1]
     prices = []
-    description = 'Купить тариф.'
-    prices = [LabeledPrice(label="Оплата тарифа: ", amount=100)]
+    description = ''
+    if action == "1":
+        description = 'Купить тариф \"Правосторонний сколиоз 1-2 степени\"'
+        prices = [LabeledPrice(label="Оплата заказа \"Правосторонний сколиоз 1-2 степени\"", amount=100)]
+    elif action == "2":
+        description = 'Купить тариф \"Левосторонний сколиоз 1-2 степени\"'
+        prices = [LabeledPrice(label="Оплата заказа \"Левосторонний сколиоз 1-2 степени\"", amount=100)]
+    elif action == "3":
+        description = 'Купить тариф \"Плоскостопие\"'
+        prices = [LabeledPrice(label="Оплата заказа \"Плоскостопие\"", amount=100)]
+
     if prices:
         await bot.send_invoice(
             chat_id=callback_query.from_user.id,
-            title='Покупка Тарифа',
+            title=f'Покупка {action}',
             description=description,
             payload=f'sub1',
             provider_token=PROVIDER_TOKEN,
@@ -72,7 +82,11 @@ async def process_pre_checkout_query(pre_checkout_query: PreCheckoutQuery, bot: 
 
 @router.message(F.successful_payment)
 async def process_successful_payment(message: Message) -> None:
-    payload_to_message = {'Тариф'}
+    payload_to_message = {
+        'sub1': 'Тариф 1',
+        'sub2': 'Тариф 2',
+        'sub3': 'тариф 3'
+    }
     response_message = payload_to_message.get(message.successful_payment.invoice_payload, "Оплата успешна!") 
     await message.answer(response_message)
 
