@@ -24,3 +24,4 @@ pay_inkb2 = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Н
 
 pay_inkb3 = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Нажмите, чтобы оплатить тариф', 
                                                                        callback_data="buy_3")]])
+

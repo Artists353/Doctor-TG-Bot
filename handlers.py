@@ -9,12 +9,11 @@ from keyboards import tariffs_kb
 from keyboards import pay_inkb1
 from keyboards import pay_inkb2
 from keyboards import pay_inkb3 
-
 from bot import Bot
 router = Router()
 
 CURRENCY = "RUB"
-PROVIDER_TOKEN = "s"
+PROVIDER_TOKEN = "390540012:LIVE:73066"
 
 @router.message(Command("start"))
 async def start(message: Message):
@@ -49,31 +48,31 @@ async def answer_tariffs(message: Message):
     await message.answer("Плоскостопие\n\n" \
     "Цена: 1499 рублей", reply_markup=pay_inkb3)
 
+
 @router.callback_query()
 async def process_callback_query(callback_query: types.CallbackQuery, bot: Bot) -> None:
     action = callback_query.data.split("_")[1]
-    prices = []
+    price = []
     description = ''
     if action == "1":
         description = 'Купить тариф \"Правосторонний сколиоз 1-2 степени\"'
-        prices = [LabeledPrice(label="Оплата заказа \"Правосторонний сколиоз 1-2 степени\"", amount=1499*100)]
+        price= [LabeledPrice(label="Оплата заказа \"Правосторонний сколиоз 1-2 степени\"", amount=1499*100)]
     elif action == "2":
         description = 'Купить тариф \"Левосторонний сколиоз 1-2 степени\"'
-        prices = [LabeledPrice(label="Оплата заказа \"Левосторонний сколиоз 1-2 степени\"", amount=1499*100)]
+        price = [LabeledPrice(label="Оплата заказа \"Левосторонний сколиоз 1-2 степени\"", amount=1499*100)]
     elif action == "3":
         description = 'Купить тариф \"Плоскостопие\"'
-        prices = [LabeledPrice(label="Оплата заказа \"Плоскостопие\"", amount=1499*100)]
+        price = [LabeledPrice(label="Оплата заказа \"Плоскостопие\"", amount=1499*100)]
 
-    if prices:
+    if price:
         await bot.send_invoice(
             chat_id=callback_query.from_user.id,
             title=f'Покупка {action}',
             description=description,
-            payload=f'sub1',
+            payload='tariff',
             provider_token=PROVIDER_TOKEN,
             currency=CURRENCY,
-            start_parameter='live',
-            prices=prices
+            prices=price
         )
 
 @router.pre_checkout_query()
@@ -89,7 +88,6 @@ async def process_successful_payment(message: Message) -> None:
     }
     response_message = payload_to_message.get(message.successful_payment.invoice_payload, "Оплата успешна!") 
     await message.answer(response_message)
-
 
 @router.message(lambda message: message.text and message.text.lower() == "не соглашаться")
 async def answer_disagree(message: Message):
