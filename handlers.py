@@ -56,13 +56,13 @@ async def process_callback_query(callback_query: types.CallbackQuery, bot: Bot) 
     description = ''
     if action == "1":
         description = 'Купить тариф \"Правосторонний сколиоз 1-2 степени\"'
-        prices = [LabeledPrice(label="Оплата заказа \"Правосторонний сколиоз 1-2 степени\"", amount=100)]
+        prices = [LabeledPrice(label="Оплата заказа \"Правосторонний сколиоз 1-2 степени\"", amount=1499*100)]
     elif action == "2":
         description = 'Купить тариф \"Левосторонний сколиоз 1-2 степени\"'
-        prices = [LabeledPrice(label="Оплата заказа \"Левосторонний сколиоз 1-2 степени\"", amount=100)]
+        prices = [LabeledPrice(label="Оплата заказа \"Левосторонний сколиоз 1-2 степени\"", amount=1499*100)]
     elif action == "3":
         description = 'Купить тариф \"Плоскостопие\"'
-        prices = [LabeledPrice(label="Оплата заказа \"Плоскостопие\"", amount=100)]
+        prices = [LabeledPrice(label="Оплата заказа \"Плоскостопие\"", amount=1499*100)]
 
     if prices:
         await bot.send_invoice(
@@ -72,7 +72,7 @@ async def process_callback_query(callback_query: types.CallbackQuery, bot: Bot) 
             payload=f'sub1',
             provider_token=PROVIDER_TOKEN,
             currency=CURRENCY,
-            start_parameter='test',
+            start_parameter='live',
             prices=prices
         )
 
