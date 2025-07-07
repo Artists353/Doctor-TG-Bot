@@ -44,17 +44,10 @@ async def answer_agree(message: Message):
 async def answer_tariffs(message: Message):
     await message.answer("Правосторонний сколиоз 1-2 степени\n\n" \
     "Цена: 1499 рублей", reply_markup=pay_inkb1)
-
     await message.answer("Левосторонний сколиоз 1-2 степени\n\n" \
     "Цена: 1499 рублей", reply_markup=pay_inkb2)
     await message.answer("Плоскостопие\n\n" \
     "Цена: 1499 рублей", reply_markup=pay_inkb3)
-
-
-@router.pre_checkout_query()
-async def process_pre_checkout_query(pre_checkout_query: PreCheckoutQuery, bot: Bot) -> None:
-    await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True)
-
 
 @router.callback_query()
 async def process_callback_query(callback_query: types.CallbackQuery, bot: Bot) -> None:
@@ -66,15 +59,21 @@ async def process_callback_query(callback_query: types.CallbackQuery, bot: Bot) 
             chat_id=callback_query.from_user.id,
             title='Покупка Тарифа',
             description=description,
+            payload=f'sub1',
             provider_token=PROVIDER_TOKEN,
-            prices=prices,
-            currency=CURRENCY 
+            currency=CURRENCY,
+            start_parameter='test',
+            prices=prices
         )
+
+@router.pre_checkout_query()
+async def process_pre_checkout_query(pre_checkout_query: PreCheckoutQuery, bot: Bot) -> None:
+    await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True)
 
 @router.message(F.successful_payment)
 async def process_successful_payment(message: Message) -> None:
     payload_to_message = {'Тариф'}
-    response_message = payload_to_message.get(message.successful_payment.invoice_payload, "Оплата успешна!")
+    response_message = payload_to_message.get(message.successful_payment.invoice_payload, "Оплата успешна!") 
     await message.answer(response_message)
 
 
