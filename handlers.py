@@ -66,13 +66,7 @@ async def process_callback_query(callback_query: types.CallbackQuery, bot: Bot) 
 
     if price:
         await bot.send_invoice(
-            chat_id=callback_query.from_user.id,
-            title=f'Покупка {action}',
-            description=description,
-            payload='tariff',
-            provider_token=PROVIDER_TOKEN,
-            currency=CURRENCY,
-            prices=price
+            
         )
 
 @router.pre_checkout_query()
